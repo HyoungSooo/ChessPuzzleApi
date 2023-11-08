@@ -6,6 +6,7 @@ from typing import List
 from django.db import connection
 from api.models import *
 import random
+from django.views.generic import TemplateView
 
 api = NinjaAPI()
 
@@ -91,4 +92,5 @@ def get_puzzle_range_of_rating(request, max: int, min: int):
 
 urlpatterns = [
     path('', api.urls),
+    path('index/', TemplateView.as_view(template_name='index.html'))
 ]

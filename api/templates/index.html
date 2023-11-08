@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+  <title>Document</title>
+</head>
+<body>
+  
+  <main id="main-doc">
+    <section class="main-section" id="Assign_Multiple_Values"  style = 'padding-bottom: 50px;'>
+      <h1>Chess Puzzle API</h1>
+      <br/>
+      <br/>
+      <h3>Default Url : "https://chess.run.goorm.io"</h3>
+      <br/>
+      <ul id="2a4cfb52-abf3-40b4-9046-2dcbd7ebec54" class="bulleted-list"><li style="list-style-type:disc"><strong>GET</strong> <strong>/puzzle?limit=&lt;int&gt;&amp; offset=&lt;int&gt; ⇒ 
+Provides puzzle data as much as limit.</strong></li></ul><pre id="ea458ddf-b34f-431d-946c-be681b0ab44f" class="code"><code>{
+  &quot;items&quot;: [
+    {
+      &quot;puzzleid&quot;: &quot;string&quot;,
+      &quot;rating&quot;: &quot;string&quot;,
+      &quot;fen&quot;: &quot;string&quot;,
+      &quot;tag&quot;: &quot;string&quot;,
+      &quot;gameurl&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;count&quot;: 0
+}</code></pre><ul id="7b723c24-fd1c-41e9-bf3c-8fde419e07c1" class="bulleted-list"><li style="list-style-type:disc"><strong>GET</strong> <strong>/puzzle/move?puzzleid=&lt;str&gt; ⇒ Provides problem information for specific puzzles</strong></li></ul><pre id="9d9d37c4-d2e1-4472-862e-432f0240227b" class="code"><code>}
+	&quot;puzzleid&quot;: &quot;string&quot;,
+  &quot;tag&quot;: &quot;string&quot;,
+  &quot;fen&quot;: &quot;string&quot;,
+  &quot;move&quot;: [
+    &quot;string&quot;
+  ]
+}</code></pre><ul id="bea27478-6f7a-492d-ab6d-b5de4e705a3c" class="bulleted-list"><li style="list-style-type:disc"><strong>GET</strong> <strong>/theme ⇒ 
+Provides themes for all puzzles</strong></li></ul><pre id="42b50a56-3b03-4d6f-ac00-4952184f6183" class="code"><code>[
+  {
+    &quot;theme&quot;: &quot;string&quot;
+  }
+]</code></pre><ul id="24a67dd0-1500-4690-9842-ef5012e9b6a8" class="bulleted-list"><li style="list-style-type:disc"><strong>GET</strong> <strong>/theme/puzzle?theme=&lt;str&gt; ⇒ 
+Provides one random puzzle among puzzles with a specific theme</strong></li></ul><pre id="babae596-869e-433a-a605-ec41103e0695" class="code"><code>{
+  &quot;puzzleid&quot;: &quot;string&quot;,
+  &quot;tag&quot;: &quot;string&quot;,
+  &quot;fen&quot;: &quot;string&quot;,
+  &quot;move&quot;: [
+    &quot;string&quot;
+  ]
+}</code></pre>
+
+    </section>
+  </main>
+
+</body>
+</html>
