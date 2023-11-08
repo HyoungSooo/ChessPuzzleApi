@@ -77,6 +77,18 @@ def get_puzzle_in_theme(request, theme):
     return get_puzzle_moves_from_database(puzzle_id)
 
 
+@api.get('/rating', response=List[PuzzleOut])
+@paginate
+def get_puzzle_specific_rating(request, rating: int):
+    return Puzzle.objects.filter(rating__gte=rating - 100, rating__lte=rating)
+
+
+@api.get('/rating/range', response=List[PuzzleOut])
+@paginate
+def get_puzzle_range_of_rating(request, max: int, min: int):
+    return Puzzle.objects.filter(rating__gte=min, rating__lte=max)
+
+
 urlpatterns = [
     path('', api.urls),
 ]
