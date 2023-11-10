@@ -38,7 +38,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -149,3 +149,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# ninja
+NINJA_PAGINATION_PER_PAGE = 50
+NINJA_PAGINATION_MAX_PER_PAGE = 100

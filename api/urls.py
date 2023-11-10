@@ -1,14 +1,34 @@
-from django.urls import path
-from ninja import NinjaAPI
-from ninja.pagination import paginate
+# ninja
+from ninja import NinjaAPI, Field
+from ninja.pagination import paginate, LimitOffsetPagination
 from ninja.schema import Schema
-from typing import List
+
+# django
 from django.db import connection
+from django.db.models import QuerySet
+from django.urls import path
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.db.models.functions import Length
+from django.db.models import Case, When, Value
+
+# others
+from typing import Any, List
 from api.models import *
 import random
-from django.views.generic import TemplateView
+api = NinjaAPI(openapi_url=settings.DEBUG and "/openapi.json" or "")
 
-api = NinjaAPI()
+
+class CustomLimitPagination(LimitOffsetPagination):
+    class Input(Schema):
+        limit: int = Field(settings.NINJA_PAGINATION_PER_PAGE, ge=1)
+        offset: int = Field(0, ge=0)
+
+    def paginate_queryset(self, queryset: QuerySet, pagination: Input, **params: Any) -> Any:
+        pagination.limit = min(
+            settings.NINJA_PAGINATION_MAX_PER_PAGE, pagination.limit)
+
+        return super().paginate_queryset(queryset, pagination, **params)
 
 
 def get_puzzle_moves_from_database(id):
@@ -34,8 +54,12 @@ class PuzzleOut(Schema):
     gameurl: str
 
 
+class Error(Schema):
+    message: str
+
+
 @api.get('/puzzle', response=List[PuzzleOut])
-@paginate
+@paginate(CustomLimitPagination)
 def get_puzzle(request):
     return Puzzle.objects.all()
 
@@ -79,15 +103,47 @@ def get_puzzle_in_theme(request, theme):
 
 
 @api.get('/rating', response=List[PuzzleOut])
-@paginate
+@paginate(CustomLimitPagination)
 def get_puzzle_specific_rating(request, rating: int):
     return Puzzle.objects.filter(rating__gte=rating - 100, rating__lte=rating)
 
 
 @api.get('/rating/range', response=List[PuzzleOut])
-@paginate
+@paginate(CustomLimitPagination)
 def get_puzzle_range_of_rating(request, max: int, min: int):
     return Puzzle.objects.filter(rating__gte=min, rating__lte=max)
+
+
+@api.get('/tag', response=List[PuzzleOut])
+@paginate(CustomLimitPagination)
+def get_puzzle_specific_difficulty_level(request, tag: str):
+    return Puzzle.objects.filter(tag__iexact=tag)
+
+
+@api.get('/puzzle/rush', response={200: List[PuzzleOut], 400: Error})
+def puzzle_rush(request, num: int = 50, easy: int = 10, normal: int = 30, hard: int = 10):
+    if num > 100:
+        return 400, {'message': "Number of puzzle must less than 100"}
+
+    easy = Puzzle.objects.filter(tag__iexact='easy').order_by('?')[:easy]
+    normal = Puzzle.objects.filter(tag__iexact='normal').order_by('?')[:normal]
+    hard = Puzzle.objects.filter(tag__iexact='hard').order_by('?')[:hard]
+
+    qs: QuerySet = easy | normal | hard
+
+    qs = qs.annotate(tag_sub=Case(
+        When(tag__iexact='easy', then=Value(1)),
+        When(tag__iexact='normal', then=Value(2)),
+        When(tag__iexact='hard', then=Value(3)),
+    ))
+
+    return qs.order_by('tag_sub').only(
+        'puzzleid',
+        'rating',
+        'fen',
+        'tag',
+        'gameurl'
+    )
 
 
 urlpatterns = [
