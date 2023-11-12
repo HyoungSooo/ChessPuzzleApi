@@ -1,6 +1,47 @@
-# Chess Puzzle API
+# CHESS PUZZLE API
 
-- **GET** **/puzzle?limit=<int>& offset=<int> ⇒ puzzle 데이터를 limit만큼 제공.**
+**Chess puzzle API!
+This API utilizes chess puzzle data from the lichess database.
+We will continue to update, so please give us a lot of interest.**
+
+### Notice
+
+- **Limit values per page maximum is 1000**
+
+• **GET** **api/puzzle?limit=<int>& offset=<int>**
+
+[](https://chess.run.goorm.site/api/puzzle)
+
+**Provides puzzles.**
+
+• **GET** **api/puzzle/theme?limit=<int>& offset=<int>**
+
+[](https://chess.run.goorm.site/api/puzzle/theme)
+
+**Provides puzzles with specific themes.**
+
+• **GET** **api/rating?limit=<int>& offset=<int>**
+
+[](https://chess.run.goorm.site/api/rating)
+
+**Provides puzzles with specific rating.
+The rating range is +100. To apply detailed ratings, use other API.**
+
+ • **GET** **api/rating/range?max=<int>&min=<int>&limit=<int>& offset=<int>**
+
+[](https://chess.run.goorm.site/api/rating/range)
+
+**Provides puzzles with range of rating.**
+
+• **GET** **api/tag?limit=<int>& offset=<int>**
+
+[](https://chess.run.goorm.site/api/tag)
+
+**Provides puzzles with specific tag.**
+
+```json
+"Tag" : ['easy', 'normal', 'hard']
+```
 
 ```json
 {
@@ -17,30 +58,12 @@
 }
 ```
 
-- **GET** **/puzzle/move?puzzleid=<str> ⇒ 특정 퍼즐의 문제 정보를 제공**
+**used LimitOffsetPagination technique.
+The limit that can be called at once is limited to 1000.**
 
-```json
-}
-	"puzzleid": "string",
-  "tag": "string",
-  "fen": "string",
-  "move": [
-    "string"
-  ]
-}
-```
+- **GET** **api/puzzle/move?puzzleid=<str>**
 
-- **GET** **/theme ⇒ 모든 퍼즐의 테마를 제공**
-
-```json
-[
-  {
-    "theme": "string"
-  }
-]
-```
-
-- **GET** **/theme/puzzle?theme=<str> ⇒ 특정 테마의 퍼즐 중 랜덤한 하나의 퍼즐을 제공**
+[](https://chess.run.goorm.site/api/puzzle/move)
 
 ```json
 {
@@ -52,3 +75,37 @@
   ]
 }
 ```
+
+**Provides fen and moves of puzzles with a specific ID.**
+
+• **GET** **api/theme**
+
+[](https://chess.run.goorm.site/api/theme)
+
+```json
+[
+  {
+    "theme": "string"
+  }
+]
+```
+
+**Provides all puzzle chess themes.**
+
+• **GET** **api/puzzle/rush?num=<int>& easy=<int>& normal=<int>& hard=<int>**
+
+[](https://chess.run.goorm.site/api/puzzle/rush)
+
+```json
+[
+  {
+    "puzzleid": "string",
+    "rating": "string",
+    "fen": "string",
+    "tag": "string",
+    "gameurl": "string"
+  }
+]
+```
+
+**This is the puzzle rush mode API. The number of puzzles that can be called at once is 100.**
