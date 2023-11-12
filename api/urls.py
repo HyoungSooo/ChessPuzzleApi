@@ -40,6 +40,9 @@ def get_puzzle_moves_from_database(id):
     result = cursor.execute(query)
     total_moves = cursor.fetchall()
 
+    if not total_moves:
+        return False
+
     move = [move[0] for move in sorted(
         [(i[3:]) for i in total_moves], key=lambda x: x[-1])]
 
@@ -71,9 +74,12 @@ class PuzzlewithMoveOut(Schema):
     move: List
 
 
-@api.get('/puzzle/move', response=PuzzlewithMoveOut)
+@api.get('/puzzle/move', response={200: PuzzlewithMoveOut, 400: Error})
 def get_puzzle_move(request, puzzleid):
     res = get_puzzle_moves_from_database(puzzleid)
+
+    if not res:
+        return 400, {'message': 'invalid puzzleid'}
 
     return res
 
@@ -87,19 +93,22 @@ def get_all_theme(request):
     return Theme.objects.all()
 
 
-@api.get('/theme/puzzle', response=PuzzlewithMoveOut)
+@api.get('/puzzle/theme', response=List[PuzzleOut])
+@paginate(CustomLimitPagination)
 def get_puzzle_in_theme(request, theme):
     query = f'''
-        Select p.puzzleid, theme from puzzle_theme as p join (select * from theme where theme = '{theme}') as t on t.idx = p.idx;
+        Select p.puzzleid, p.gameurl, p.fen, p.tag, p.rating from (select k.puzzleid, k.gameurl, k.fen, k.tag, k.rating, p.idx from puzzle_theme as p join puzzle as
+        k on p.puzzleid = k.puzzleid) as p join (select * from theme where theme = '{theme}') as t on t.idx = p.idx
     '''
 
     cursor = connection.cursor()
     result = cursor.execute(query)
     puzzles_on_theme = cursor.fetchall()
-    random_select_puzzle = random.choice(puzzles_on_theme)
-    puzzle_id = random_select_puzzle[0]
 
-    return get_puzzle_moves_from_database(puzzle_id)
+    res = list(map(lambda x: {
+               'puzzleid': x[0], 'gameurl': x[1], 'fen': x[2], 'tag': x[3], 'rating': x[4]}, puzzles_on_theme))
+
+    return res
 
 
 @api.get('/rating', response=List[PuzzleOut])
@@ -148,5 +157,5 @@ def puzzle_rush(request, num: int = 50, easy: int = 10, normal: int = 30, hard: 
 
 urlpatterns = [
     path('', api.urls),
-    path('index/', TemplateView.as_view(template_name='index.html'))
+
 ]
