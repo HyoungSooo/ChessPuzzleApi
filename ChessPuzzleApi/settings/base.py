@@ -17,7 +17,7 @@ from django.core.exceptions import ImproperlyConfigured
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
 with open(secret_file) as f:
@@ -47,7 +47,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'ninja_extra',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,6 +57,7 @@ INSTALLED_APPS = [
     'api',
     'jwt_auth',
     'ninja_jwt',
+    'ninja_extra',
 ]
 
 MIDDLEWARE = [

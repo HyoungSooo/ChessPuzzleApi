@@ -158,6 +158,7 @@ secrets.json
 secrets
 # Pyre type checker
 .pyre/
+sqlite3.db
 
 # pytype static type analyzer
 .pytype/
