@@ -23,3 +23,7 @@ class PuzzlewithMoveOut(Schema):
 
 class ThemeOut(Schema):
     theme: str
+
+
+class OpeningOut(Schema):
+    opening: str

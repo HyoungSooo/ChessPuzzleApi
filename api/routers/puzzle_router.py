@@ -1,12 +1,10 @@
 # ninja
 from ninja_extra import Router
 from ninja.pagination import paginate
-from ninja.schema import Schema
 
 # django
 from django.db import connection
 from django.db.models import QuerySet
-from django.urls import path
 from django.db.models import Case, When, Value
 
 # others

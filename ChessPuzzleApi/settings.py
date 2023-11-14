@@ -47,7 +47,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'ninja_extra',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,6 +57,7 @@ INSTALLED_APPS = [
     'api',
     'jwt_auth',
     'ninja_jwt',
+    'ninja_extra',
 ]
 
 MIDDLEWARE = [
