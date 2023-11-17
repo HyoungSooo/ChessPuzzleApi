@@ -13,8 +13,7 @@ from jwt_auth.router import router as auth_router
 from api.routers.puzzle_router import router as puzzle_router
 from api.routers.puzzle_opening import router as opening_router
 
-api = NinjaExtraAPI(
-    openapi_url=settings.DEBUG and "/openapi.json" or "")
+api = NinjaExtraAPI()
 
 api.register_controllers(NinjaJWTDefaultController)
 api.add_router(router=auth_router, prefix='auth', tags=['auth'])

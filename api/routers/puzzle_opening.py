@@ -5,7 +5,6 @@ from ninja.errors import HttpError
 
 # django
 from django.db import connection
-from django.db.models import Case, When, Value
 from django.db.models import F
 
 # others
@@ -59,7 +58,7 @@ def search_opening_name_with_like_method(request, query: str):
 def get_puzzle_in_opening(request, opening):
     sql = f'''
         Select p.puzzleid, p.gameurl, p.fen, p.tag, p.rating from (select k.puzzleid, k.gameurl, k.fen, k.tag, k.rating, p.idx from puzzle_opening as p join puzzle as
-        k on p.puzzleid = k.puzzleid) as p join (select * from openingtag where tag = '{opening}') as t on t.idx = p.idx
+        k on p.puzzleid = k.puzzleid) as p join (select * from openingtag where tag = 'Kings_Knight_Opening') as t on t.idx = p.idx
     '''
     cursor = connection.cursor()
     result = cursor.execute(sql)
