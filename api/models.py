@@ -61,3 +61,23 @@ class Theme(models.Model):
     class Meta:
         managed = False
         db_table = 'theme'
+
+
+class Openingtag(models.Model):
+    idx = models.AutoField(primary_key=True)
+    tag = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'openingtag'
+
+
+class PuzzleOpening(models.Model):
+    puzzleid = models.ForeignKey(
+        Puzzle, models.DO_NOTHING, db_column='puzzleid', blank=True, null=True)
+    idx = models.ForeignKey(Openingtag, models.DO_NOTHING,
+                            db_column='idx', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'puzzle_opening'

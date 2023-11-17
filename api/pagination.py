@@ -19,5 +19,4 @@ class CustomLimitPagination(LimitOffsetPagination):
     def paginate_queryset(self, queryset: QuerySet, pagination: Input, **params: Any) -> Any:
         pagination.limit = min(
             settings.NINJA_PAGINATION_MAX_PER_PAGE, pagination.limit)
-
         return super().paginate_queryset(queryset, pagination, **params)
