@@ -6,7 +6,7 @@ We will continue to update, so please give us a lot of interest.**
 
 ### Notice
 
-- **Limit values per page maximum is 1000**
+- **Limit values per page maximum is 100**
 
 ### Website
 [API WEBSITE](https://chess.run.goorm.site/)

@@ -1,6 +1,7 @@
 django==3.2
 django-ninja==0.19.1
 psycopg2==2.7.7
-django-ninja-jwt
-django-redis
-django-Ninja-Extra
+django-ninja-jwt==5.2.5
+django-redis==5.4.0
+django-Ninja-Extra == 0.19.3
+djangorestframework-simplejwt
