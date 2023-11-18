@@ -677,48 +677,7 @@ blockquote {
 </p><p id="a97eefad-a403-4a81-b0ad-8048be97d7ac" class=""><strong>Chess puzzle API!
 This API utilizes chess puzzle data from the lichess database.
 We will continue to update, so please give us a lot of interest.</strong></p><p id="d3618504-8d81-42cf-8c35-f7ab545ff42b" class="">
-</p><h3 id="45b332e7-4b76-4d1b-a896-982d8a1306fe" class="">Notice</h3><ul id="38282ea8-3af8-443e-abd8-4c285fcf9569" class="bulleted-list"><li style="list-style-type:disc"><strong>Limit values per page maximum is 1000</strong></li></ul><p id="d9cb2763-1dba-4dc5-88e3-7fcf56bcbc72" class="">
-</p><p id="2d30ccaa-599f-412e-9158-592417b996da" class="">
-</p><p id="fc4e84ee-a2f8-406b-bf39-b4b7767fdf07" class="">• <strong>GET</strong> <strong>api/puzzle?limit=&lt;int&gt;&amp; offset=&lt;int&gt;</strong></p><figure id="7cd2755d-7239-46fe-ad72-bc279e98634f"><a href="https://chess.run.goorm.site/api/puzzle" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/puzzle</div></div></a></figure><p id="11a35060-1d49-47ae-84a4-197e775cbd41" class=""><strong>Provides puzzles.</strong></p><p id="72eedf54-73a0-4ac2-90da-e08506cb97e5" class="">
-</p><p id="215e4b93-dfd7-42b7-ab63-8d0adcf93d23" class="">• <strong>GET</strong> <strong>api/puzzle/theme?limit=&lt;int&gt;&amp; offset=&lt;int&gt;</strong></p><figure id="2f99fd9f-e5f2-48e9-8077-288d6da60cd9"><a href="https://chess.run.goorm.site/api/puzzle/theme" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/puzzle/theme</div></div></a></figure><p id="21f9badd-12a9-4f13-8e51-b5900cc89411" class=""><strong>Provides puzzles with specific themes.</strong></p><p id="66a6aa5a-ceff-4d75-954d-59eef675863a" class="">
-</p><p id="fe9b72ad-3f7d-43dc-8c3a-cf575f3c1c18" class="">• <strong>GET</strong> <strong>api/rating?limit=&lt;int&gt;&amp; offset=&lt;int&gt;</strong></p><figure id="cea98944-011c-4c47-9ec9-33e3dac5bafc"><a href="https://chess.run.goorm.site/api/rating" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/rating</div></div></a></figure><p id="b9925799-3672-460f-a83e-8ce2f373cfb3" class=""><strong>Provides puzzles with specific rating.
-The rating range is +100. To apply detailed ratings, use other API.</strong></p><p id="f8fd42a5-0a8b-49ac-a3b1-bd80c9e65b82" class="">
-</p><p id="accd639c-15e6-44cb-beef-dea542061b72" class=""> • <strong>GET</strong> <strong>api/rating/range?max=&lt;int&gt;&amp;min=&lt;int&gt;&amp;limit=&lt;int&gt;&amp; offset=&lt;int&gt;</strong></p><figure id="b4ee3671-2241-429a-8257-a384c8eba273"><a href="https://chess.run.goorm.site/api/rating/range" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/rating/range</div></div></a></figure><p id="5ef419a0-6e36-473c-8c31-61aa8a17510c" class=""><strong>Provides puzzles with range of rating.</strong></p><p id="2157987b-1de8-4043-93eb-26e932eb258c" class="">
-</p><p id="31a09e4f-85c0-4cd7-b6c9-8973f17f5bd3" class="">• <strong>GET</strong> <strong>api/tag?limit=&lt;int&gt;&amp; offset=&lt;int&gt;</strong></p><figure id="cae2713c-0a24-400b-85e8-98a47aa7aed9"><a href="https://chess.run.goorm.site/api/tag" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/tag</div></div></a></figure><p id="2b41ce14-c1d4-4a07-ac19-67e6d1d81969" class=""><strong>Provides puzzles with specific tag.</strong></p><pre id="aca80eb3-12b4-4089-88df-88a237456fab" class="code"><code>&quot;Tag&quot; : [&#x27;easy&#x27;, &#x27;normal&#x27;, &#x27;hard&#x27;]</code></pre><p id="fd9358e5-9942-470b-84c1-bce792a45897" class="">
-</p><pre id="b462e627-be27-45e0-9330-7d444cfe12b3" class="code"><code>{
-  &quot;items&quot;: [
-    {
-      &quot;puzzleid&quot;: &quot;string&quot;,
-      &quot;rating&quot;: &quot;string&quot;,
-      &quot;fen&quot;: &quot;string&quot;,
-      &quot;tag&quot;: &quot;string&quot;,
-      &quot;gameurl&quot;: &quot;string&quot;
-    }
-  ],
-  &quot;count&quot;: 0
-}</code></pre><p id="a3c310ab-ddf5-42bf-b354-30741f813f82" class=""><strong>used LimitOffsetPagination technique.
-The limit that can be called at once is limited to 1000.</strong></p><p id="b7908643-5eaf-4351-b460-7fab811e701e" class="">
-</p><ul id="48e55883-f8c8-4d90-b391-d19483896508" class="bulleted-list"><li style="list-style-type:disc"><strong>GET</strong> <strong>api/puzzle/move?puzzleid=&lt;str&gt;</strong></li></ul><figure id="3e5bd1be-880e-4983-83a9-40714906cadd"><a href="https://chess.run.goorm.site/api/puzzle/move" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/puzzle/move</div></div></a></figure><pre id="1716c4d6-b02e-4390-afa5-e9d06ac36acd" class="code code-wrap"><code>{
-  &quot;puzzleid&quot;: &quot;string&quot;,
-  &quot;tag&quot;: &quot;string&quot;,
-  &quot;fen&quot;: &quot;string&quot;,
-  &quot;move&quot;: [
-    &quot;string&quot;
-  ]
-}</code></pre><p id="707cf2f4-c2ac-45ce-890f-6570eb1459cd" class=""><strong>Provides fen and moves of puzzles with a specific ID.</strong></p><p id="80ba8bd1-5fb1-4ae3-9f4d-af12377b8325" class="">
-</p><p id="be9b9dc1-7111-4966-9609-d3b1ffde0cda" class="">• <strong>GET</strong> <strong>api/theme</strong></p><figure id="c98342c4-cb00-4059-8a22-934c896db39e"><a href="https://chess.run.goorm.site/api/theme" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/theme</div></div></a></figure><pre id="b972a67a-0f71-44b9-8348-72cc0e0abad0" class="code code-wrap"><code>[
-  {
-    &quot;theme&quot;: &quot;string&quot;
-  }
-]</code></pre><p id="e1c4635d-cccd-4711-89b5-a686c80988c6" class=""><strong>Provides all puzzle chess themes.</strong></p><p id="bad48afb-195b-4ca3-8991-e98a836b8141" class="">
-</p><p id="73334079-326a-4c72-950c-cc6f06882ecc" class="">
-</p><p id="a1bf0dee-5bfd-4da5-9369-030d4586d131" class="">• <strong>GET</strong> <strong>api/puzzle/rush?num=&lt;int&gt;&amp; easy=&lt;int&gt;&amp; normal=&lt;int&gt;&amp; hard=&lt;int&gt;</strong></p><figure id="5c770f73-7c35-49a8-a35b-ab51e723f7d8"><a href="https://chess.run.goorm.site/api/puzzle/rush" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://chess.run.goorm.site/api/puzzle/rush</div></div></a></figure><pre id="985471b7-0bea-40eb-9547-3827ab82f53a" class="code code-wrap"><code>[
-  {
-    &quot;puzzleid&quot;: &quot;string&quot;,
-    &quot;rating&quot;: &quot;string&quot;,
-    &quot;fen&quot;: &quot;string&quot;,
-    &quot;tag&quot;: &quot;string&quot;,
-    &quot;gameurl&quot;: &quot;string&quot;
-  }
-]</code></pre><p id="4e244a32-7545-41c2-ad9a-aedc5f98b933" class=""><strong>This is the puzzle rush mode API. The number of puzzles that can be called at once is 100.</strong></p><p id="ff26281d-f580-4a1c-8677-c155e966ba89" class="">
-</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+</p><h3 id="45b332e7-4b76-4d1b-a896-982d8a1306fe" class="">Notice</h3><ul id="38282ea8-3af8-443e-abd8-4c285fcf9569" class="bulleted-list"><li style="list-style-type:disc"><strong>Limit values per page maximum is 100</strong></li></ul><ul id="c3fdeb72-7325-4982-bf4c-5deb316c360d" class="bulleted-list"><li style="list-style-type:disc"><strong>Using JWT to authentication</strong></li></ul><ul id="1168ac86-5ae4-4f9e-ae52-cb9ae214e61a" class="bulleted-list"><li style="list-style-type:disc"><strong>There is a 5 second delay between requests. </strong><ul id="21acf660-0240-408b-80a8-dd5dd56cfb13" class="bulleted-list"><li style="list-style-type:circle"><strong>When on delay, the response is (401, unauthorized)</strong></li></ul></li></ul><p id="d9cb2763-1dba-4dc5-88e3-7fcf56bcbc72" class="">
+</p><h3 id="57d5fb6a-af02-4a03-8868-556ffbdaecc1" class="">Swagger</h3><figure id="114db78d-df15-475b-8f55-32d5c8a97e2c"><a href="https://pychess.run.goorm.io/api/docs" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">NinjaExtraAPI</div></div><div class="bookmark-href"><img src="https://ninja.rest-framework.com/favicon.png" class="icon bookmark-icon"/>https://pychess.run.goorm.io/api/docs</div></div></a></figure><p id="b3ba5b64-996e-4a0f-be9b-ee8aa42d11f2" class="">
+</p><h3 id="63c22190-98d1-4aed-831c-c7db7455e24e" class="">C<strong>ontribute</strong></h3><p id="9359129e-a394-4cc2-8022-a92c1d03bfa6" class=""><strong>If you have anything to say to me or bug report, please feel free to contact me.</strong></p><p id="8822f763-312e-4a09-960c-1a09eb33ea12" class="">
+</p><ul id="108405ec-6118-4aa6-b9ce-0ebf1a7b1f31" class="bulleted-list"><li style="list-style-type:disc"><strong>Github issue</strong></li></ul><figure id="14da56a2-6716-45c5-b0c3-be72bb5a1668"><a href="https://github.com/HyoungSooo/ChessPuzzleApi/issues" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Issues · HyoungSooo/ChessPuzzleApi</div><div class="bookmark-description">Chess Puzzle API. Contribute to HyoungSooo/ChessPuzzleApi development by creating an account on GitHub.</div></div><div class="bookmark-href"><img src="https://github.com/fluidicon.png" class="icon bookmark-icon"/>https://github.com/HyoungSooo/ChessPuzzleApi/issues</div></div><img src="https://opengraph.githubassets.com/e71341c6d004a0709314486b95d190f7726ed33df1678a4d8182863ae93d103d/HyoungSooo/ChessPuzzleApi" class="bookmark-image"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
