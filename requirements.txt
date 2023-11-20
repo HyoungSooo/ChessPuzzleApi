@@ -5,3 +5,4 @@ django-ninja-jwt==5.2.5
 django-redis==5.4.0
 django-Ninja-Extra == 0.19.3
 djangorestframework-simplejwt
+elasticsearch

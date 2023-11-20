@@ -10,6 +10,7 @@ from django.db.models import Case, When, Value
 # others
 from typing import List
 from api.models import *
+from api.routers.utils import get_puzzle_moves_from_database
 
 # auth
 from jwt_auth.barrer import JWTAuthRequired
@@ -22,24 +23,6 @@ from api.schema import *
 
 
 router = Router(auth=JWTAuthRequired())
-
-
-def get_puzzle_moves_from_database(id):
-    query = f'''
-        SELECT p.puzzleid, p.tag, p.fen, m.move, m.number from (select puzzleid, tag, fen from puzzle where puzzleid = '{id}') as p join (select a.move, b.puzzleid, b.number from move as a join
-        puzzle_move as b on a.idx = b.idx) as m on p.puzzleid = m.puzzleid;
-    '''
-    cursor = connection.cursor()
-    result = cursor.execute(query)
-    total_moves = cursor.fetchall()
-
-    if not total_moves:
-        return False
-
-    move = [move[0] for move in sorted(
-        [(i[3:]) for i in total_moves], key=lambda x: x[-1])]
-
-    return PuzzlewithMoveOut(puzzleid=id, tag=total_moves[0][1], move=move, fen=total_moves[0][2])
 
 
 @router.get('', response=List[PuzzleOut])
@@ -55,7 +38,7 @@ def get_puzzle_move(request, puzzleid):
     if not res:
         return 400, {'message': 'invalid puzzleid'}
 
-    return res
+    return PuzzlewithMoveOut(**res)
 
 
 @router.get('/theme/category', response=List[ThemeOut])

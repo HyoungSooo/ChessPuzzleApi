@@ -15,7 +15,7 @@ class JWTAuthRequired(HttpBearer):
                     return False
                 else:
                     cache.set(response[0].username, 'done', 5)
-                    return True  # 200 OK
+                    return response[0].username  # 200 OK
             return False  # 401
         except Exception:
             # Any exception we want it to return False i.e 401

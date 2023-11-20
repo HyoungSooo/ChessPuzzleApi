@@ -14,6 +14,11 @@ class Error(Schema):
     message: str
 
 
+class UserHealthCheck(Schema):
+    message: str = None
+    username: str
+
+
 class PuzzlewithMoveOut(Schema):
     puzzleid: str
     tag: str
@@ -27,3 +32,7 @@ class ThemeOut(Schema):
 
 class OpeningOut(Schema):
     opening: str
+
+
+class Username(Schema):
+    username: str
